@@ -1,0 +1,27 @@
+type Media {
+  id: ID,
+  filename: String
+  originalUrl: String
+  mediumUrl: String
+  largeUrl: String
+  createdDate: String
+  updatedDate: String
+}
+
+type Query {
+  getMedia(mediaId: ID!): Media
+  getMedias: [Media]
+}
+
+input MediaInput {
+  id: ID,
+  filename: String
+  originalUrl: String
+  mediumUrl: String
+  largeUrl: String
+}
+
+type Mutation {
+  saveMedia(media: MediaInput!): Media
+  deleteMedia(mediaId: ID!): Media
+}

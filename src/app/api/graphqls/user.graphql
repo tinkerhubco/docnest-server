@@ -1,0 +1,44 @@
+type User {
+  id: ID
+  email: String
+  password: String
+  firstName: String
+  middleName: String
+  lastName: String
+  profileMedia: Media
+  roles: [Role]
+  subscription: Subscription
+  appointments: [Appointment]
+}
+
+type Login {
+  user: User
+  token: String
+}
+
+type Query {
+  getUser(userId: ID!): User
+  getUsers: [User]
+  getPatients: [User]
+  getDoctors: [User]
+}
+
+input UserInput {
+  id: ID
+  email: String
+  password: String
+  firstName: String
+  middleName: String
+  lastName: String
+  profileMedia: MediaInput
+  roles: [RoleInput]
+  subscription: SubscriptionInput
+}
+
+type Mutation {
+  saveUser(user: UserInput!): User
+  savePatient(user: UserInput!): User
+  saveDoctor(user: UserInput!): User
+  deleteUser(userId: ID!): User
+  login(email: String!, password: String!): Login
+}

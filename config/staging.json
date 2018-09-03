@@ -1,0 +1,13 @@
+{
+  "port": 8080,
+  "database": {
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "docnest",
+    "password": "docnest",
+    "database": "docnest_staging",
+    "synchronize": true,
+    "entities": ["src/app/database/entities/*.entity.ts"]
+  }
+}

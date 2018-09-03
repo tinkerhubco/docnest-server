@@ -1,0 +1,31 @@
+version: "3"
+networks:
+  myapp:
+
+services:
+  postgres:
+    image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_DB: docnest-docker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      myapp:
+        aliases:
+          - postgres
+  web:
+    build: .
+    command: [sh, -c, "npm run start:dev"]
+    ports:
+      - "80:3000"
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_HOST=postgres
+    networks:
+      myapp:
+        aliases:
+          - web

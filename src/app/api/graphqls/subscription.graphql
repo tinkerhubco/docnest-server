@@ -1,0 +1,19 @@
+type Subscription {
+  id: ID,
+  name: String
+}
+
+type Query {
+  getSubscription(id: ID!): Subscription
+  getSubscriptions: [Subscription]
+}
+
+input SubscriptionInput {
+  id: ID,
+  name: String
+}
+
+type Mutation {
+  saveSubscription(data: SubscriptionInput!): Subscription
+  deleteSubscription(id: ID!): Subscription
+}

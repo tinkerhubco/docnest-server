@@ -1,0 +1,27 @@
+type Address {
+  id: ID,
+  street: String
+  city: String
+  country: String
+  zipcode: String
+  createdDate: String
+  updatedDate: String
+}
+
+type Query {
+  getAddress(addressId: ID!): Address
+  getAddresses: [Address]
+}
+
+input AddressInput {
+  id: ID,
+  street: String
+  city: String
+  country: String
+  zipcode: String
+}
+
+type Mutation {
+  saveAddress(address: AddressInput!): Address
+  deleteAddress(addressId: ID!): Address
+}
