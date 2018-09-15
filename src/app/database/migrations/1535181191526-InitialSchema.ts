@@ -136,7 +136,7 @@ export class InitialSchema1535181191526 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.query(
-      `DROP TABLE "user", "user_role", "user_address", "media", "address", "subscription", "appointment" CASCADE`
+      `DROP TABLE "user", "role", "user_role", "user_address", "media", "address", "subscription", "appointment" CASCADE`
     );
   }
 }
