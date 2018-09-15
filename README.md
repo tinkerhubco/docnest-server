@@ -1,5 +1,5 @@
 # DocNest
-[![CircleCI](https://circleci.com/gh/tinker-hub/docnest.svg?style=svg)](https://circleci.com/gh/tinker-hub/docnest)
+[![CircleCI](https://circleci.com/gh/tinker-hub/docnest-server.svg?style=svg)](https://circleci.com/gh/tinker-hub/docnest-server)
 
 ## Description
 
