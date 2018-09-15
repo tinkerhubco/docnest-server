@@ -4,7 +4,7 @@ import express = require('express');
 import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 
-import { AppModule } from './../../app.module';
+import { AppModule } from '../../app.module';
 import { DatabaseService, DatabaseModule } from '../../database';
 import { ApiModule } from '../api.module';
 

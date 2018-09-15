@@ -8,5 +8,9 @@
     "password": "docnest",
     "database": "docnest_dev",
     "entities": ["src/app/database/entities/*.entity.ts"]
+  },
+  "pagination": {
+    "max": 100,
+    "default": 10
   }
 }

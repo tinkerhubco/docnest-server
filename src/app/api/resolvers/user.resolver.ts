@@ -1,3 +1,4 @@
+import config = require('config');
 import { Inject, UseGuards } from '@nestjs/common';
 import { Mutation, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import * as _ from 'lodash';
@@ -12,6 +13,7 @@ import { AccessControlGuard } from '../guards';
 import { AccessControl } from '../decorators';
 import { ACL } from '../enums';
 import { UserService } from '../services';
+import { Filter } from '../../shared';
 
 @UseGuards(AccessControlGuard)
 @Resolver('User')
@@ -33,10 +35,15 @@ export class UserResolver {
     return this.userRepository.findOne(userId);
   }
 
-  @AccessControl([ACL.Admin])
+  // @AccessControl([ACL.Admin])
   @Query()
   async getUsers(request, args) {
-    return this.userRepository.find();
+    const { filter = {} }: { filter: Filter } = args;
+    // to do add service for manipulating generic filter
+    if (!filter.sort) filter.sort = 'user.id';
+    filter.limit = Math.min(config.get('pagination.max'), filter.limit || config.get('pagination.default'));
+    const offset = (filter.page || 0) * filter.limit;
+    return this.userRepository.getUsers(filter.sort, filter.order || 'ASC', filter.limit, offset, '%' + (filter.search || '') + '%');
   }
 
   @AccessControl([ACL.Admin])

@@ -11,6 +11,13 @@ type User {
   appointments: [Appointment]
 }
 
+input FilterInput {
+  page: Int
+  limit: Int
+  order: String
+  search: String
+}
+
 type Login {
   user: User
   token: String
@@ -18,7 +25,7 @@ type Login {
 
 type Query {
   getUser(userId: ID!): User
-  getUsers: [User]
+  getUsers(filter: FilterInput): [User]
   getPatients: [User]
   getDoctors: [User]
 }
