@@ -26,11 +26,11 @@ export class AccessControlGuard implements CanActivate {
       case ACL.Owner:
         return user && request.params.id === user.id;
       case ACL.Admin:
-        return user && _.find(user.roles, { name: ACL.Admin });
+        return user && !!_.find(user.roles, { name: ACL.Admin });
       case ACL.Doctor:
-        return user && _.find(user.roles, { name: ACL.Doctor });
+        return user && !!_.find(user.roles, { name: ACL.Doctor });
       case ACL.Patient:
-        return user && _.find(user.roles, { name: ACL.Patient });
+        return user && !!_.find(user.roles, { name: ACL.Patient });
       default:
         return false;
     }
