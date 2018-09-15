@@ -2,7 +2,12 @@ import { Inject, UseGuards } from '@nestjs/common';
 import { Mutation, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import * as _ from 'lodash';
 
-import { User, UserRepository, RoleRepository, AppointmentRepository } from '../../database';
+import {
+  User,
+  UserRepository,
+  RoleRepository,
+  AppointmentRepository
+} from '../../database';
 import { AccessControlGuard } from '../guards';
 import { AccessControl } from '../decorators';
 import { ACL } from '../enums';
@@ -50,21 +55,21 @@ export class UserResolver {
   @Mutation()
   async saveUser(request, args) {
     const { user } = args;
-    return this.userService.saveUser({...user});
+    return this.userService.saveUser({ ...user });
   }
 
   @AccessControl([ACL.Admin, ACL.Doctor])
   @Mutation()
   async saveDoctor(request, args) {
     const { user } = args;
-    return this.userService.saveDoctor({...user});
+    return this.userService.saveDoctor({ ...user });
   }
 
   @AccessControl([ACL.Admin, ACL.Doctor])
   @Mutation()
   async savePatient(request, args) {
     const { user } = args;
-    return this.userService.savePatient({...user});
+    return this.userService.savePatient({ ...user });
   }
 
   @AccessControl([ACL.Admin])

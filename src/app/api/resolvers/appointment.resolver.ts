@@ -3,7 +3,12 @@ import { Mutation, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import { subDays } from 'date-fns';
 import * as _ from 'lodash';
 
-import { Appointment, AppointmentRepository, UserRepository, User } from '../../database';
+import {
+  Appointment,
+  AppointmentRepository,
+  UserRepository,
+  User
+} from '../../database';
 import { Roles, ACL } from '../enums';
 import { AccessControl } from '../decorators';
 import { AccessControlGuard } from '../guards';
@@ -37,11 +42,13 @@ export class AppointmentResolver {
     if (!!_.find(currentUser.roles, { name: Roles.Doctor })) {
       appointment.doctor = { id: currentUser.id };
       const appointmentsCount = await this.appointmentRepository.count({
-        where: { doctor: { id: currentUser.id, createdDate: subDays(new Date(), 1) } }
+        where: {
+          doctor: { id: currentUser.id, createdDate: subDays(new Date(), 1) }
+        }
       });
       if (appointmentsCount >= 5) throw new BadRequestException();
     }
-    return this.appointmentRepository.save({...appointment});
+    return this.appointmentRepository.save({ ...appointment });
   }
 
   @Mutation()

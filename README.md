@@ -40,13 +40,10 @@ configurations were catch by config module by default
 $ npm run migration:create --name MigrationName
 
 # running up migration
-$ npm run migration:run
+$ npm run migration:up
 
 # running down migration
-$ npm run migration:revert
-
-# generating migration
-$ npm run migration:generate --name MigrationName
+$ npm run migration:down
 ```
 
 ## Running the app

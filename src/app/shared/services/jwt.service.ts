@@ -3,7 +3,6 @@ import { sign, verify } from 'jsonwebtoken';
 
 @Injectable()
 export class JwtService {
-
   public sign(data: any) {
     if (!data) return;
     return sign(data, 'secret');

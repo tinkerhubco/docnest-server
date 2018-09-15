@@ -1,15 +1,25 @@
-import { Injectable, Inject, UnauthorizedException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  UnauthorizedException,
+  BadRequestException
+} from '@nestjs/common';
 import { classToPlain } from 'class-transformer';
 import { subDays } from 'date-fns';
 import * as _ from 'lodash';
 
-import { UserRepository, User, RoleRepository, Appointment, AppointmentRepository } from '../../database';
+import {
+  UserRepository,
+  User,
+  RoleRepository,
+  Appointment,
+  AppointmentRepository
+} from '../../database';
 import { BcryptService, JwtService } from '../../shared';
 import { Roles } from '../enums';
 
 @Injectable()
 export class UserService {
-
   constructor(
     @Inject('UserRepositoryToken')
     private readonly userRepository: UserRepository,
@@ -27,7 +37,10 @@ export class UserService {
       relations: ['roles']
     });
     if (!user) throw new UnauthorizedException();
-    const isValidPassword = await this.bcryptService.compareHash(password, user.password);
+    const isValidPassword = await this.bcryptService.compareHash(
+      password,
+      user.password
+    );
     if (!isValidPassword) throw new UnauthorizedException();
     const token = this.jwtService.sign(classToPlain(user));
     return { user, token };
@@ -36,7 +49,8 @@ export class UserService {
   async preProcessUser(user: User) {
     const exists = await this.userRepository.exists(user);
     if (!exists) delete user.id;
-    if (user.password) user.password = await this.bcryptService.hash(user.password);
+    if (user.password)
+      user.password = await this.bcryptService.hash(user.password);
     console.log(user);
   }
 
@@ -70,7 +84,10 @@ export class UserService {
   }
 
   async addUserAppointments(userId: number, appointments: Appointment[]) {
-    _.forEach(appointments, (appointment) => appointment.doctor = { id: userId });
+    _.forEach(
+      appointments,
+      appointment => (appointment.doctor = { id: userId })
+    );
     const userRoles = await this.userRepository.getUserRoles(userId);
     console.log(userRoles);
     if (!!_.find(userRoles, { name: Roles.Doctor })) {

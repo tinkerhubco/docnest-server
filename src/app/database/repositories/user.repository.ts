@@ -4,14 +4,11 @@ import { User } from '../entities';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-
   async exists(user: User) {
     if (!user || !user.id) return false;
-    return !!(
-        await this.findOne(user.id, {
-        select: ['id']
-      })
-    );
+    return !!(await this.findOne(user.id, {
+      select: ['id']
+    }));
   }
 
   async getUserRoles(userId: number) {
@@ -23,13 +20,17 @@ export class UserRepository extends Repository<User> {
 
   async getDoctors() {
     return this.createQueryBuilder('user')
-      .innerJoinAndSelect('user.roles', 'role', 'role.name = :role', {role: 'Doctor'})
+      .innerJoinAndSelect('user.roles', 'role', 'role.name = :role', {
+        role: 'Doctor'
+      })
       .getMany();
   }
 
   async getPatients() {
     return this.createQueryBuilder('user')
-      .innerJoinAndSelect('user.roles', 'role', 'role.name = :role', {role: 'Patient'})
+      .innerJoinAndSelect('user.roles', 'role', 'role.name = :role', {
+        role: 'Patient'
+      })
       .getMany();
   }
 }

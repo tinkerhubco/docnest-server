@@ -8,13 +8,11 @@ export class DatabaseService {
   ) {}
 
   public async connect(): Promise<void> {
-    if (!this.connection.isConnected)
-      await this.connection.connect();
+    if (!this.connection.isConnected) await this.connection.connect();
   }
 
   public async disconnect() {
-    if (this.connection.isConnected)
-      await this.connection.close();
+    if (this.connection.isConnected) await this.connection.close();
   }
 
   public async reset() {

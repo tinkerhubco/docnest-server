@@ -2,13 +2,20 @@ import _ = require('lodash');
 import config = require('config');
 import { createConnection, Connection } from 'typeorm';
 
-import { UserRepository, RoleRepository, MediaRepository, AppointmentRepository, AddressRepository, SubscriptionRepository } from './repositories';
+import {
+  UserRepository,
+  RoleRepository,
+  MediaRepository,
+  AppointmentRepository,
+  AddressRepository,
+  SubscriptionRepository
+} from './repositories';
 
 export const DatabaseProviders = [
   {
     provide: 'DbConnectionToken',
     useFactory: async () =>
-    await createConnection(_.clone(config.get('database')))
+      await createConnection(_.clone(config.get('database')))
   },
   {
     provide: 'UserRepositoryToken',

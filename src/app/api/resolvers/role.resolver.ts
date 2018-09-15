@@ -24,7 +24,7 @@ export class RoleResolver {
   @Mutation()
   async saveRole(request, args) {
     const { role } = args;
-    return this.roleRepository.save({...role});
+    return this.roleRepository.save({ ...role });
   }
 
   @Mutation()

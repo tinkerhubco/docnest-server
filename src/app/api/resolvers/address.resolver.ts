@@ -23,7 +23,7 @@ export class AddressResolver {
   @Mutation()
   async saveAddress(request, args) {
     const { address } = args;
-    return this.addressRepository.save({...address});
+    return this.addressRepository.save({ ...address });
   }
 
   @Mutation()

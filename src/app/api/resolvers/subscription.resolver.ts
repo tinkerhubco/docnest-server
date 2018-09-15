@@ -24,7 +24,7 @@ export class SubscriptionResolver {
   @Mutation()
   async saveSubscription(request, args) {
     const { subscription } = args;
-    return this.subscriptionRepository.save({...subscription});
+    return this.subscriptionRepository.save({ ...subscription });
   }
 
   @Mutation()

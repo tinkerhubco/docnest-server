@@ -4,10 +4,7 @@ import { JwtService } from '../../shared';
 
 @Injectable()
 export class AccessTokenMiddleware implements NestMiddleware {
-
-  constructor(
-    private jwtService: JwtService
-  ) { }
+  constructor(private jwtService: JwtService) {}
 
   public resolve(...args: any[]): MiddlewareFunction {
     return (request, response, next) => {

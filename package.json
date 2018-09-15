@@ -12,10 +12,9 @@
     "start:development": "cross-env NODE_ENV=development nodemon",
     "start:staging": "cross-env NODE_ENV=staging npm run build && node ./build/main.js",
     "start:production": "cross-env NODE_ENV=production npm run build && node ./build/main.js",
-    "migration:run": "npm run build && typeorm migration:run",
-    "migration:revert": "npm run build && typeorm migration:revert",
-    "migration:create": "npm run build && typeorm migration:create --name",
-    "migration:generate": "npm run build && typeorm migration:generate --name"
+    "migration:up": "npm run build && typeorm migration:run",
+    "migration:down": "npm run build && typeorm migration:revert",
+    "migration:create": "npm run build && typeorm migration:create --name"
   },
   "dependencies": {
     "@nestjs/common": "^5.0.0",

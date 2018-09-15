@@ -8,11 +8,9 @@ import {
 
 @Entity()
 export class Media {
-  @PrimaryGeneratedColumn()
-  public id: number;
+  @PrimaryGeneratedColumn() public id: number;
 
-  @Column()
-  public filename: string;
+  @Column() public filename: string;
 
   @Column({ name: 'original_url' })
   public originalUrl: string;

@@ -24,7 +24,7 @@ export class MediaResolver {
   @Mutation()
   async saveMedia(request, args) {
     const { media } = args;
-    return this.mediaRepository.save({...media});
+    return this.mediaRepository.save({ ...media });
   }
 
   @Mutation()
