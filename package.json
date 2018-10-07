@@ -7,7 +7,7 @@
   "scripts": {
     "format": "prettier --write \"**/*.ts\"",
     "build": "rimraf -rf ./build && tsc",
-    "test": "NODE_ENV=test jest --env=node",
+    "test": "cross-env NODE_ENV=test jest --env=node",
     "start": "npm run start:development",
     "start:development": "cross-env NODE_ENV=development nodemon",
     "start:staging": "cross-env NODE_ENV=staging npm run build && node ./build/main.js",
