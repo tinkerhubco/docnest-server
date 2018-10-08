@@ -110,6 +110,15 @@ export class UserResolver {
       .loadOne();
   }
 
+  @ResolveProperty('addresses')
+  async getUserAddresses(user: User, args) {
+    return this.userRepository
+      .createQueryBuilder()
+      .relation('address')
+      .of(user)
+      .loadMany();
+  }
+
   @ResolveProperty('appointments')
   async getUserAppointments(user: User, args) {
     return this.appointmentRepository.find({

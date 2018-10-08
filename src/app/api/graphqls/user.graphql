@@ -8,6 +8,7 @@ type User {
   profileMedia: Media
   roles: [Role]
   subscription: Subscription
+  addresses: [Address]
   appointments: [Appointment]
 }
 
@@ -40,6 +41,7 @@ input UserInput {
   profileMedia: MediaInput
   roles: [RoleInput]
   subscription: SubscriptionInput
+  address: [AddressInput]
 }
 
 type Mutation {
