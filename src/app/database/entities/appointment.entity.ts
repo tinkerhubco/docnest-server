@@ -22,6 +22,10 @@ export class Appointment {
   @JoinColumn({ name: 'patient_id' })
   public patient: User;
 
+  @OneToOne(type => User)
+  @JoinColumn({ name: 'created_by' })
+  public createdBy: User;
+
   @Column('text') public status: string;
 
   @Column('timestamp') public date: Date;
