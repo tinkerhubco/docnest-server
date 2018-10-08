@@ -5,7 +5,7 @@ type User {
   firstName: String
   middleName: String
   lastName: String
-  profileMedia: Media
+  media: Media
   roles: [Role]
   subscription: Subscription
   addresses: [Address]
@@ -38,7 +38,7 @@ input UserInput {
   firstName: String
   middleName: String
   lastName: String
-  profileMedia: MediaInput
+  media: MediaInput
   roles: [RoleInput]
   subscription: SubscriptionInput
   address: [AddressInput]

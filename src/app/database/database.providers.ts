@@ -8,7 +8,8 @@ import {
   MediaRepository,
   AppointmentRepository,
   AddressRepository,
-  SubscriptionRepository
+  SubscriptionRepository,
+  MedicalRepository
 } from './repositories';
 
 export const DatabaseProviders = [
@@ -51,6 +52,12 @@ export const DatabaseProviders = [
     provide: 'SubscriptionRepositoryToken',
     useFactory: (connection: Connection) =>
       connection.getCustomRepository(SubscriptionRepository),
+    inject: ['DbConnectionToken']
+  },
+  {
+    provide: 'MedicalRepositoryToken',
+    useFactory: (connection: Connection) =>
+      connection.getCustomRepository(MedicalRepository),
     inject: ['DbConnectionToken']
   }
 ];

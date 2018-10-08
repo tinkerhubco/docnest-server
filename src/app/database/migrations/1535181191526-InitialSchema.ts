@@ -12,7 +12,9 @@ export class InitialSchema1535181191526 implements MigrationInterface {
 				"last_name" character varying NOT NULL,
 				"created_date" TIMESTAMP NOT NULL DEFAULT now(),
 				"updated_date" TIMESTAMP NOT NULL DEFAULT now(),
-				"profile_media_id" integer, "subscription_id" integer,
+        "media_id" integer,
+        "subscription_id" integer,
+        "medical_id" integer,
 				PRIMARY KEY ("id")
 			)`
     );
@@ -88,10 +90,35 @@ export class InitialSchema1535181191526 implements MigrationInterface {
 			)`
     );
     await queryRunner.query(
-      `ALTER TABLE "user" ADD CONSTRAINT "user__profile_media_id" FOREIGN KEY ("profile_media_id") REFERENCES "media"("id")`
+      `CREATE TABLE "medical" (
+				"id" SERIAL NOT NULL,
+				"conditions" text,
+				"medications" text,
+				"treatments" text,
+				"created_date" TIMESTAMP NOT NULL DEFAULT now(),
+				"updated_date" TIMESTAMP NOT NULL DEFAULT now(),
+				PRIMARY KEY ("id")
+			)`
+    );
+    await queryRunner.query(
+      `CREATE TABLE "diagnostic" (
+				"id" SERIAL NOT NULL,
+				"diagnostic" text,
+				"date" TIMESTAMP,
+				"created_date" TIMESTAMP NOT NULL DEFAULT now(),
+        "updated_date" TIMESTAMP NOT NULL DEFAULT now(),
+        "medical_id" integer,
+				PRIMARY KEY ("id")
+			)`
+    );
+    await queryRunner.query(
+      `ALTER TABLE "user" ADD CONSTRAINT "user__media_id" FOREIGN KEY ("media_id") REFERENCES "media"("id")`
     );
     await queryRunner.query(
       `ALTER TABLE "user" ADD CONSTRAINT "user__subscription_id" FOREIGN KEY ("subscription_id") REFERENCES "subscription"("id")`
+    );
+    await queryRunner.query(
+      `ALTER TABLE "user" ADD CONSTRAINT "user__medical_id" FOREIGN KEY ("medical_id") REFERENCES "medical"("id")`
     );
     await queryRunner.query(
       `ALTER TABLE "appointment" ADD CONSTRAINT "appointment__doctor_id" FOREIGN KEY ("doctor_id") REFERENCES "user"("id")`
@@ -136,7 +163,7 @@ export class InitialSchema1535181191526 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.query(
-      `DROP TABLE "user", "role", "user_role", "user_address", "media", "address", "subscription", "appointment" CASCADE`
+      `DROP TABLE "user", "role", "user_role", "user_address", "media", "address", "subscription", "appointment", "medical", "diagnostic" CASCADE`
     );
   }
 }

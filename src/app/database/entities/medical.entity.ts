@@ -3,14 +3,25 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  JoinColumn,
+  OneToMany
 } from 'typeorm';
+import { Diagnotic } from './diagnostic.entity';
 
 @Entity()
 export class Medical {
   @PrimaryGeneratedColumn() public id?: number;
 
-  @Column() public name: string;
+  @Column() public conditions: string;
+
+  @Column() public medications: string;
+
+  @Column() public treatments: string;
+
+  @OneToMany(type => Diagnotic, diagnostic => diagnostic.medical)
+  @JoinColumn({ name: 'diagnostic_id' })
+  public diagnostics: Diagnotic[];
 
   @CreateDateColumn({
     name: 'created_date',

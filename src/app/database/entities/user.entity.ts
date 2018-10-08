@@ -15,6 +15,7 @@ import { Media } from './media.entity';
 import { Address } from './address.entity';
 import { Subscription } from './subscription.entity';
 import { Appointment } from './appointment.entity';
+import { Medical } from './medical.entity';
 
 @Entity()
 export class User {
@@ -52,8 +53,12 @@ export class User {
   public updatedDate?: Date;
 
   @OneToOne(type => Media)
-  @JoinColumn({ name: 'profile_media_id' })
-  public profileMedia?: Media;
+  @JoinColumn({ name: 'media_id' })
+  public media?: Media;
+
+  @OneToOne(type => Medical)
+  @JoinColumn({ name: 'medical_id' })
+  public medical?: Medical;
 
   @OneToOne(type => Subscription)
   @JoinColumn({ name: 'subscription_id' })
