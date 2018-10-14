@@ -163,11 +163,6 @@ export class InitialSchema1535181191526 implements MigrationInterface {
 			(1, 1), (2, 2), (3, 2), (4, 3)`
     );
     await queryRunner.query(
-      `INSERT INTO "user_role" (user_id, role_id)
-				VALUES
-			(1, 1), (2, 2), (3, 2), (4, 3)`
-    );
-    await queryRunner.query(
       `INSERT INTO "appointment" (status, "date", created_date, updated_date, doctor_id, patient_id)
         VALUES
       ('', now(), now(), now(), 2, 4), ('', now(), now(), now(), 3, 4);`
