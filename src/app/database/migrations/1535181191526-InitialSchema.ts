@@ -127,6 +127,9 @@ export class InitialSchema1535181191526 implements MigrationInterface {
       `ALTER TABLE "appointment" ADD CONSTRAINT "appointment__patient_id" FOREIGN KEY ("patient_id") REFERENCES "user"("id")`
     );
     await queryRunner.query(
+      `ALTER TABLE "diagnostic" ADD CONSTRAINT "diagnostic__medical_id" FOREIGN KEY ("medical_id") REFERENCES "medical"("id")`
+    );
+    await queryRunner.query(
       `ALTER TABLE "user_role" ADD CONSTRAINT "user_role__user_id" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE`
     );
     await queryRunner.query(
@@ -158,6 +161,11 @@ export class InitialSchema1535181191526 implements MigrationInterface {
       `INSERT INTO "user_role" (user_id, role_id)
 				VALUES
 			(1, 1), (2, 2), (3, 2), (4, 3)`
+    );
+    await queryRunner.query(
+      `INSERT INTO "appointment" (status, "date", created_date, updated_date, doctor_id, patient_id)
+        VALUES
+      ('', now(), now(), now(), 2, 4), ('', now(), now(), now(), 3, 4);`
     );
   }
 
