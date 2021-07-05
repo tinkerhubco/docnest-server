@@ -1,7 +1,8 @@
 type Appointment {
-  id: ID,
+  id: ID
   doctor: User
   patient: User
+  createdBy: User
   status: String
   date: String
 }
@@ -12,9 +13,10 @@ type Query {
 }
 
 input AppointmentInput {
-  id: ID,
+  id: ID
   doctor: UserInput
   patient: UserInput
+  createdBy: UserInput
   status: String
   date: String
 }

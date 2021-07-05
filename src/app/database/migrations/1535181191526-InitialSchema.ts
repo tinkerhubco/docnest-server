@@ -85,7 +85,8 @@ export class InitialSchema1535181191526 implements MigrationInterface {
 				"created_date" TIMESTAMP NOT NULL DEFAULT now(),
 				"updated_date" TIMESTAMP NOT NULL DEFAULT now(),
 				"doctor_id" integer,
-				"patient_id" integer,
+        "patient_id" integer,
+        "created_by" integer,
 				PRIMARY KEY ("id")
 			)`
     );
@@ -125,6 +126,9 @@ export class InitialSchema1535181191526 implements MigrationInterface {
     );
     await queryRunner.query(
       `ALTER TABLE "appointment" ADD CONSTRAINT "appointment__patient_id" FOREIGN KEY ("patient_id") REFERENCES "user"("id")`
+    );
+    await queryRunner.query(
+      `ALTER TABLE "appointment" ADD CONSTRAINT "appointment__created_by" FOREIGN KEY ("created_by") REFERENCES "user"("id")`
     );
     await queryRunner.query(
       `ALTER TABLE "diagnostic" ADD CONSTRAINT "diagnostic__medical_id" FOREIGN KEY ("medical_id") REFERENCES "medical"("id")`
